@@ -1,0 +1,30 @@
+{
+  "name": "curio",
+  "version": "0.1.0",
+  "description": "Small flexible string template engine.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brianoneil/curio.git"
+  },
+  "keywords": [
+    "string",
+    "template",
+    "replace"
+  ],
+  "author": "Brian O'Neil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brianoneil/curio/issues"
+  },
+  "homepage": "https://github.com/brianoneil/curio",
+  "dependencies": {
+    "debug": "~2.1.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}
