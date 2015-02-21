@@ -4,7 +4,11 @@
 
 A small server side string template engine.  String replacement engine that allow you to do property name based replacement in string templates from multiple JSON objects at a time.
 
+##Installation
+
 ```npm install --save curio```
+
+##Usage
 
 A simple example:
 ```javascript
