@@ -45,7 +45,7 @@ console.log(rendered);
 
 ```
 
-** The objects can't have name collisions  at the root level because they are merged into a single object. **
+*** The objects can't have name collisions  at the root level because they are merged into a single object. ***
 
 I built this to do server side replacement on web hooks, but it is generally useful to just process strings.
 
