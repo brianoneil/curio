@@ -1,5 +1,6 @@
 var debugP = require('debug')('curio:process'),
-    debug = require('debug')('curio');
+    debugG = require('debug')('curio'),
+    debug = require('debug');
 
 function curio(template, data) {
   return template.replace(/\{([\w\.]*)\}/g, function(str, key) {
@@ -18,7 +19,9 @@ function mergeProps(obj1,obj2){
 
 function processArguements(args) {
 
-    debugP('found %s objects to process. \nObject:\n%s', args.length, JSON.stringify(args, null, 4))
+    if(debug.enabled('curio:process')) {
+        debugP('found %s objects to process. \nObject:\n%s', args.length, JSON.stringify(args, null, 4));
+    }
 
     var combinedProps = {};
 
@@ -33,8 +36,11 @@ function processArguements(args) {
 }
 
 module.exports = function(template, data) {
-    //debug('template: %s', template);
-    debugP('arguments(%s): %s', arguments.length, JSON.stringify(arguments, null, 4));
+    //debugG('template: %s', template);
+
+    if(debug.enabled('curio:process')) {
+        debugP('arguments(%s): %s', arguments.length, JSON.stringify(arguments, null, 4));
+    }
 
     var renderedTemplate = template;
 

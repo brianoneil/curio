@@ -1,6 +1,6 @@
 {
   "name": "curio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Small flexible string template engine.",
   "main": "index.js",
   "scripts": {
