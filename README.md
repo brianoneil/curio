@@ -56,3 +56,4 @@ I built this to do server side replacement on web hooks, but it is generally use
 * 0.1.0 Initial version of the library
 * 0.2.0 Changed logging behavior to only stringify objects when debug is enabled for the `curio:process` namespace
 * 0.2.1 readme update
+* 1.0.0 Updated reference for debug
