@@ -63,6 +63,22 @@ describe('Curio Template Processing', function(){
           assert.equal('hello world', curio(myTemplate, name1, name2));
 
       });
+      it('should replace the fields in the template from 2 objects and make it upper case', function () {
+          var myTemplate = '{first|UPPER} {last|UPPER}';
+          var name1 = { first: 'hello' },
+              name2 = { last: 'world' };
+
+          assert.equal('HELLO WORLD', curio(myTemplate, name1, name2));
+
+      });
+      it('should replace the fields in the template from 2 objects and make it lower case', function () {
+          var myTemplate = '{first|LOWER} {last|LOWER}';
+          var name1 = { first: 'HELLO' },
+              name2 = { last: 'World' };
+
+          assert.equal('hello world', curio(myTemplate, name1, name2));
+
+      });
       it('should replace both the fields in the template from a single property', function(){
           var myTemplate = '{first} {last} {first}';
           var name1 = {first : 'hello'},
