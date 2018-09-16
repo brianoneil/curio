@@ -49,11 +49,31 @@ console.log(rendered);
 
 ```
 
+_NEW_ basic string commands can now be applied in the template.  
+Supported commands are currently **UPPER** and **LOWER**
+
+```javascript
+var curio = require('curio');
+
+var myTemplate = 'hello {userName|UPPER}';
+var user = {userName : 'world'};
+
+var rendered = curio(myTemplate, user);
+
+//now rendered == 'hello WORLD'
+console.log(rendered);
+
+```
+
 ***The objects can't have name collisions  at the root level because they are merged into a single object.***
 
 I built this to do server side replacement on web hooks, but it is generally useful to just process strings.
 
-* 0.1.0 Initial version of the library
-* 0.2.0 Changed logging behavior to only stringify objects when debug is enabled for the `curio:process` namespace
-* 0.2.1 readme update
+* 1.1.0 Added basic command support for UPPER and LOWER
 * 1.0.0 Updated reference for debug
+* 0.2.1 readme update
+* 0.2.0 Changed logging behavior to only stringify objects when debug is enabled for the `curio:process` namespace
+* 0.1.0 Initial version of the library
+
+
+
