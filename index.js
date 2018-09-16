@@ -22,7 +22,9 @@ function curio(template, data) {
 
     var keys = key.split("."), v = data[keys.shift()];
 
-    for (var i = 0, l = keys.length; i < l; i++) v = v[keys[i]];
+    for (var i = 0, l = keys.length; i < l; i++) {
+        v = v[keys[i]];
+    }
 
     var ret = (typeof v !== "undefined" && v !== null) ? v : str;
 
