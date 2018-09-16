@@ -12,6 +12,22 @@ describe('Curio Template Processing', function(){
 
     });
 
+    it('should replace the field in the template and make them upper case', function () {
+        var myTemplate = 'hello {userName|UPPER}';
+        var user = { userName: 'world' };
+
+        assert.equal('hello WORLD', curio(myTemplate, user));
+
+    });
+
+    it('should replace the field in the template and make them lower case', function () {
+        var myTemplate = 'hello {userName|LOWER}';
+        var user = { userName: 'World' };
+
+        assert.equal('hello world', curio(myTemplate, user));
+
+    });
+
     it('should replace both the fields in the template', function(){
         var myTemplate = '{userName} hello {userName}';
         var user = {userName : 'world'};

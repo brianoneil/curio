@@ -1,13 +1,54 @@
 var debugP = require('debug')('curio:process'),
-    debugG = require('debug')('curio'),
+    debugG = require('debug')('curio:internal'),
     debug = require('debug');
 
 function curio(template, data) {
-  return template.replace(/\{([\w\.]*)\}/g, function(str, key) {
+    
+  return template.replace(/\{([\w\.\|]*)\}/g, function(str, key) {
+
+    let cmd = null;
+    if (key.match(/.*\|.*/)) {
+    
+        //this contains a command, we need to process the command
+
+        let valsAndCmds = key.split('|');
+        key = valsAndCmds[0];
+        cmd = valsAndCmds[1];
+
+        if (debug.enabled('curio:internal')) {
+            debugG(`key: ${valsAndCmds[0]} cmds: ${valsAndCmds[1]}`);
+        }
+    }
+
     var keys = key.split("."), v = data[keys.shift()];
+
     for (var i = 0, l = keys.length; i < l; i++) v = v[keys[i]];
-    return (typeof v !== "undefined" && v !== null) ? v : str;
+
+    let ret = (typeof v !== "undefined" && v !== null) ? v : str;
+
+    ret = processCmd(cmd, ret);
+
+    return ret
   });
+}
+
+function processCmd(cmd, value) {
+
+    if(!cmd) return value;
+    
+    processedValue = value;
+
+    switch (cmd) {
+        case 'LOWER':
+            processedValue = value.toLowerCase();
+            break;
+        case 'UPPER':
+            processedValue = value.toUpperCase();
+            break;
+        default:
+            break;
+    }
+    return processedValue;
 }
 
 function mergeProps(obj1,obj2){
