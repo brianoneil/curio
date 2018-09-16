@@ -6,12 +6,12 @@ function curio(template, data) {
     
   return template.replace(/\{([\w\.\|]*)\}/g, function(str, key) {
 
-    let cmd = null;
+    var cmd = null;
     if (key.match(/.*\|.*/)) {
     
         //this contains a command, we need to process the command
 
-        let valsAndCmds = key.split('|');
+        var valsAndCmds = key.split('|');
         key = valsAndCmds[0];
         cmd = valsAndCmds[1];
 
@@ -24,7 +24,7 @@ function curio(template, data) {
 
     for (var i = 0, l = keys.length; i < l; i++) v = v[keys[i]];
 
-    let ret = (typeof v !== "undefined" && v !== null) ? v : str;
+    var ret = (typeof v !== "undefined" && v !== null) ? v : str;
 
     ret = processCmd(cmd, ret);
 
