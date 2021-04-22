@@ -3,41 +3,45 @@ var debugP = require('debug')('curio:process'),
     debug = require('debug');
 
 function curio(template, data) {
-    
-  return template.replace(/\{([\w\.\|]*)\}/g, function(str, key) {
 
-    var cmd = null;
-    if (key.match(/.*\|.*/)) {
-    
-        //this contains a command, we need to process the command
+    if (!template) {
+        return template;
+    }
 
-        var valsAndCmds = key.split('|');
-        key = valsAndCmds[0];
-        cmd = valsAndCmds[1];
+    return template.replace(/\{([\w\.\|]*)\}/g, function (str, key) {
 
-        if (debug.enabled('curio:internal')) {
-            debugG(`key: ${valsAndCmds[0]} cmds: ${valsAndCmds[1]}`);
+        var cmd = null;
+        if (key.match(/.*\|.*/)) {
+
+            //this contains a command, we need to process the command
+
+            var valsAndCmds = key.split('|');
+            key = valsAndCmds[0];
+            cmd = valsAndCmds[1];
+
+            if (debug.enabled('curio:internal')) {
+                debugG(`key: ${valsAndCmds[0]} cmds: ${valsAndCmds[1]}`);
+            }
         }
-    }
 
-    var keys = key.split("."), v = data[keys.shift()];
+        var keys = key.split("."), v = data[keys.shift()];
 
-    for (var i = 0, l = keys.length; i < l; i++) {
-        v = v[keys[i]];
-    }
+        for (var i = 0, l = keys.length; i < l; i++) {
+            v = v[keys[i]];
+        }
 
-    var ret = (typeof v !== "undefined" && v !== null) ? v : str;
+        var ret = (typeof v !== "undefined" && v !== null) ? v : str;
 
-    ret = processCmd(cmd, ret);
+        ret = processCmd(cmd, ret);
 
-    return ret
-  });
+        return ret
+    });
 }
 
 function processCmd(cmd, value) {
 
-    if(!cmd) return value;
-    
+    if (!cmd) return value;
+
     processedValue = value;
 
     switch (cmd) {
@@ -53,7 +57,7 @@ function processCmd(cmd, value) {
     return processedValue;
 }
 
-function mergeProps(obj1,obj2){
+function mergeProps(obj1, obj2) {
     var obj3 = {};
     for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
     for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
@@ -62,13 +66,13 @@ function mergeProps(obj1,obj2){
 
 function processArguements(args) {
 
-    if(debug.enabled('curio:process')) {
+    if (debug.enabled('curio:process')) {
         debugP('found %s objects to process. \nObject:\n%s', args.length, JSON.stringify(args, null, 4));
     }
 
     var combinedProps = {};
 
-    for (var i=0;i<args.length;i++) {
+    for (var i = 0; i < args.length; i++) {
         debugP('processing arg: %s', JSON.stringify(args[i], null, 4));
         combinedProps = mergeProps(combinedProps, args[i])
     };
@@ -78,16 +82,16 @@ function processArguements(args) {
     return combinedProps;
 }
 
-module.exports = function(template, data) {
+module.exports = function (template, data) {
     //debugG('template: %s', template);
 
-    if(debug.enabled('curio:process')) {
+    if (debug.enabled('curio:process')) {
         debugP('arguments(%s): %s', arguments.length, JSON.stringify(arguments, null, 4));
     }
 
     var renderedTemplate = template;
 
-    if(arguments.length > 2) {
+    if (arguments.length > 2) {
         //get the arguements, not including the template
         var dataObjects = Array.prototype.slice.call(arguments, 1);
         //replace the org data object with one that has all the properties on a single one

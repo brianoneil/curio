@@ -69,6 +69,7 @@ console.log(rendered);
 
 I built this to do server side replacement on web hooks, but it is generally useful to just process strings.
 
+* 1.2.0 Added check for bad template data (`null` and `undefined`) and supporting tests
 * 1.1.0 Added basic command support for UPPER and LOWER
 * 1.0.0 Updated reference for debug
 * 0.2.1 readme update

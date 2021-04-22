@@ -108,4 +108,31 @@ describe('Curio Template Processing', function(){
 
 
   });
+
+    describe('Check bad input does not throw error', function () {
+
+        it('pass a null template', function () {
+            var myTemplate = null;
+            var name1 = { first: 'hello' },
+                name2 = { last: 'world' };
+
+            assert.equal(null, curio(myTemplate, name1, name2));
+
+        });
+        it('pass "undefined" as the template', function () {
+            var myTemplate = undefined;
+            var name1 = { first: 'hello' },
+                name2 = { last: 'world' };
+
+            assert.equal(undefined, curio(myTemplate, name1, name2));
+
+        });
+        it('pass null data', function () {
+            var myTemplate = '{first}';
+            var name1 = { first: null };
+
+            assert.equal(myTemplate, curio(myTemplate, name1));
+
+        });
+    });
 })
