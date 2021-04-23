@@ -134,5 +134,12 @@ describe('Curio Template Processing', function(){
             assert.equal(myTemplate, curio(myTemplate, name1));
 
         });
+        it('pass object instead of string as templete', function () {
+            var myTemplate = {};
+            var name1 = { first: 'hello' };
+
+            assert.equal(myTemplate, curio(myTemplate, name1));
+
+        });
     });
 })

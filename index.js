@@ -4,7 +4,7 @@ var debugP = require('debug')('curio:process'),
 
 function curio(template, data) {
 
-    if (!template) {
+    if (!template || (typeof template !== 'string')) {
         return template;
     }
 
